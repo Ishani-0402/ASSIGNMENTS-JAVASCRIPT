@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        #quote-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+
+        #quote {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        #getQuoteBtn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #getQuoteBtn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Random Quote Generator</h1>
+    </header>
+    <div id="quote-container">
+        <div id="quote"></div>
+        <button id="getQuoteBtn">Get Random Quote</button>
+    </div>
+
+    <script>
+        // Array of quotes
+        const quotes = [
+            "The only way to do great work is to love what you do. - Steve Jobs",
+            "In the end, we will remember not the words of our enemies, but the silence of our friends. - Martin Luther King Jr.",
+            "The only thing necessary for the triumph of evil is for good men to do nothing. - Edmund Burke",
+            "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
+            "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment. - Ralph Waldo Emerson"
+        ];
+
+        // Function to get a random quote
+        function getRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            return quotes[randomIndex];
+        }
+
+        // Function to display a random quote
+        function displayRandomQuote() {
+            const quoteElement = document.getElementById("quote");
+            quoteElement.textContent = getRandomQuote();
+        }
+
+        // Add a click event listener to the button
+        const getQuoteBtn = document.getElementById("getQuoteBtn");
+        getQuoteBtn.addEventListener("click", displayRandomQuote);
+
+        // Initial display of a random quote
+        displayRandomQuote();
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My User</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Faster+One">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Users of My Website</h1>
+        <p>Total users: <span id="totalUsers"></span> | Total pages: <span id="totalPages"></span></p>
+    </header>
+    <section id="userList">
+        <!-- User data will be displayed here -->
+    </section>
+    <script>
+        const header = document.querySelector('header');
+        const section = document.querySelector('#userList');
+        const totalUsers = document.querySelector('#totalUsers');
+        const totalPages = document.querySelector('#totalPages');
+
+        let requestURL = 'https://reqres.in/api/users?page=1';
+        let request = new XMLHttpRequest();
+        request.open('GET', requestURL);
+        request.responseType = 'json';
+        request.send();
+
+        request.onload = function () {
+            const websiteUsers = request.response;
+            populateHeader(websiteUsers);
+            showUsers(websiteUsers);
+        }
+
+        function populateHeader(jsonObj) {
+            const total = jsonObj.total;
+            const totalPagesValue = jsonObj.total_pages;
+            totalUsers.textContent = total;
+            totalPages.textContent = totalPagesValue;
+        }
+
+        function showUsers(jsonObj) {
+            const jsonData = jsonObj.data;
+
+            for (let i = 0; i < jsonData.length; i++) {
+                const user = jsonData[i];
+
+                const myArticle = document.createElement('article');
+                const myH2 = document.createElement('h2');
+                const myPara1 = document.createElement('p');
+                const myPara2 = document.createElement('p');
+                const myPara3 = document.createElement('p');
+                const image = document.createElement('img');
+
+                myH2.textContent = `User ID: ${user.id}`;
+                myPara1.textContent = `First Name: ${user.first_name}`;
+                myPara2.textContent = `Last Name: ${user.last_name}`;
+                myPara3.textContent = `Email: ${user.email}`;
+                image.src = user.avatar;
+
+                myArticle.appendChild(myH2);
+                myArticle.appendChild(myPara1);
+                myArticle.appendChild(myPara2);
+                myArticle.appendChild(myPara3);
+                myArticle.appendChild(image);
+
+                section.appendChild(myArticle);
+            }
+        }
+    </script>
+</body>
+</html>
